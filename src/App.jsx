@@ -149,13 +149,13 @@ export default function App() {
       {/* ═══ NAVBAR ═══ */}
       <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             {/* 로고: 화이트 메인 — mix-blend-mode:multiply로 흰 배경 투명처럼 처리 */}
             <div className="flex-shrink-0">
               <img
                 src="/img/itda_logo_White_main.png"
                 alt="잇다"
-                className="h-14 w-auto object-contain"
+                className="h-20 w-auto object-contain"
                 style={{ mixBlendMode: 'multiply' }}
                 onError={e => {
                   e.currentTarget.src = '/img/itda_logo_gradation.png'
@@ -209,16 +209,16 @@ export default function App() {
 
       {/* ═══ HERO ═══ */}
       <section
-        className="pt-16 min-h-screen flex items-center"
+        className="pt-24 min-h-screen flex items-center"
         style={{ background: 'linear-gradient(135deg, #EDFFF9 0%, #FFFFFF 45%, #EEF4FF 100%)' }}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
 
-          {/* ── 두 컬럼: items-center로 시각적 중심 정렬 ── */}
-          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+          {/* ── 두 컬럼: stretch + 각 컬럼 내부 justify-center ── */}
+          <div className="flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16">
 
-            {/* 왼쪽: badge + H1 + 부제목 + 버튼 */}
-            <div className="flex-1 min-w-0 text-center lg:text-left">
+            {/* 왼쪽: 높이 맞추기 위해 flex-col justify-center */}
+            <div className="flex-1 min-w-0 flex flex-col justify-center text-center lg:text-left">
 
               {/* 배지 */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#00C8A5]/40 shadow-sm mb-8">
@@ -242,32 +242,28 @@ export default function App() {
                 <span className="gradient-text">한 곳에서 잇다</span>
               </h1>
 
-              {/* 부제목 */}
+              {/* 부제목 — 들여쓰기 없이 같은 라인 */}
               <p
-                className="text-gray-500 mb-10"
+                className="text-gray-500 mb-8"
                 style={{
                   fontSize: '1.0625rem',
                   lineHeight: 1.85,
                   letterSpacing: '-0.01em',
-                  maxWidth: '26rem',
-                  margin: '0 auto 2.5rem',
                 }}
               >
-                흩어진 정보와 여러 사이트를 찾아다니지 마세요.<br />
-                사망 이후 필요한 절차와 기관을<br />
-                <strong className="text-[#1A2035] font-semibold">쉽고 빠르게 안내</strong>해드립니다.
+                흩어진 정보와 여러 사이트를 찾아다니지 마세요. 사망 이후 필요한 절차와 기관을 <strong className="text-[#1A2035] font-semibold">쉽고 빠르게 안내</strong>해드립니다.
               </p>
 
               {/* CTA 버튼 */}
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <button
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
                   style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
                 >
                   무료로 절차 찾기 →
                 </button>
                 <button
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
                   style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
                 >
                   서비스 둘러보기
@@ -369,7 +365,7 @@ export default function App() {
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="bg-[#1A2035] py-8">
+      <footer className="bg-[#010C26] py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <img src="/img/itda_logo_black.png" alt="잇다"
