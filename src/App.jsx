@@ -7,7 +7,7 @@ const CATEGORIES = [
   { icon: '🏛️', title: '정부24·행정', desc: '상속, 사망신고, 행정절차' },
   { icon: '💬', title: 'SNS·디지털 계정', desc: '카카오, 네이버, 구글' },
   { icon: '🔄', title: '구독 서비스 확인', desc: '스트리밍, 쇼핑몰, 앱' },
-  { icon: '📋', title: '상속 운비 서류', desc: '필요 서류 한눈에 확인' },
+  { icon: '📋', title: '상속 준비 서류', desc: '필요 서류 한눈에 확인' },
 ]
 
 const TRUST = [
@@ -21,106 +21,173 @@ const NAV_LINKS = ['서비스 소개', '절차 가이드', '카테고리', '자�
 
 /* ── Hub Diagram (SVG) ── */
 function HubDiagram() {
-  const cx = 200, cy = 200, outerR = 134, innerR = 56
+  const [hoveredIdx, setHoveredIdx] = useState(null)
+  const cx = 250, cy = 250, outerR = 168, innerR = 70
 
   const nodes = CATEGORIES.map((cat, i) => {
     const angle = (i * 60 - 90) * Math.PI / 180
     return {
       ...cat,
-      x: cx + outerR * Math.cos(angle),
-      y: cy + outerR * Math.sin(angle),
+      x: Math.round(cx + outerR * Math.cos(angle)),
+      y: Math.round(cy + outerR * Math.sin(angle)),
     }
   })
 
   return (
-    <div className="relative w-full max-w-[360px] mx-auto select-none">
+    <div className="relative w-full max-w-[460px] mx-auto select-none">
       {/* Glow bg */}
       <div
         className="absolute inset-0 rounded-full blur-3xl opacity-20 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #00C8A5 0%, #0057B8 100%)' }}
       />
 
-      <svg viewBox="0 0 400 400" className="relative w-full drop-shadow-sm">
+      <svg viewBox="0 0 500 500" className="relative w-full drop-shadow-sm">
         <defs>
-          {/* Center gradient */}
           <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#00C8A5" />
             <stop offset="100%" stopColor="#0057B8" />
           </linearGradient>
-          {/* Line gradient */}
           <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#00C8A5" stopOpacity="0.5" />
             <stop offset="100%" stopColor="#0057B8" stopOpacity="0.5" />
           </linearGradient>
-          {/* Node shadow */}
-          <filter id="nodeShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#00000018" />
+          {/* 일반 노드 그림자 */}
+          <filter id="nodeShadow" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#00000018" />
           </filter>
-          {/* Center glow */}
+          {/* 호버 노드 그림자 (민트 glow) */}
+          <filter id="nodeHoverShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="6" stdDeviation="14" floodColor="#00C8A555" />
+          </filter>
+          {/* 센터 glow */}
           <filter id="centerGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur" />
+            <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
             <feFlood floodColor="#00C8A5" floodOpacity="0.3" result="color" />
             <feComposite in="color" in2="blur" operator="in" result="glow" />
             <feMerge><feMergeNode in="glow" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
+          {/* 텍스트 그림자 (center label용) */}
+          <filter id="textGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#00000040" />
+          </filter>
         </defs>
 
-        {/* Outer ring (subtle) */}
-        <circle cx={cx} cy={cy} r={outerR + 10} fill="none" stroke="#E8F4FF" strokeWidth="1" strokeDasharray="3,6" opacity="0.6" />
+        {/* Outer dashed ring */}
+        <circle
+          cx={cx} cy={cy} r={outerR + 18}
+          fill="none" stroke="#E0F0FF" strokeWidth="1.5"
+          strokeDasharray="4,9" opacity="0.7"
+        />
 
         {/* Connection lines */}
         {nodes.map((n, i) => (
           <line
             key={i}
-            x1={cx} y1={cy}
-            x2={n.x} y2={n.y}
+            x1={cx} y1={cy} x2={n.x} y2={n.y}
             stroke="url(#lineGrad)"
             strokeWidth="1.5"
-            strokeDasharray="5,5"
-            opacity="0.7"
+            strokeDasharray="6,5"
+            opacity="0.6"
           />
         ))}
-
-        {/* Category nodes */}
-        {nodes.map((n, i) => (
-          <g key={i} filter="url(#nodeShadow)" style={{ cursor: 'pointer' }}>
-            <circle cx={n.x} cy={n.y} r={31} fill="white" stroke="#EBF5FF" strokeWidth="1.5" />
-            {/* Hover ring */}
-            <circle cx={n.x} cy={n.y} r={31} fill="transparent" stroke="url(#centerGrad)" strokeWidth="0" />
-            <text x={n.x} y={n.y - 9} textAnchor="middle" fontSize="15">{n.icon}</text>
-            <text x={n.x} y={n.y + 7} textAnchor="middle" fontSize="7.5" fill="#374151" fontWeight="700">
-              {n.title.split('·')[0]}
-            </text>
-            <text x={n.x} y={n.y + 17} textAnchor="middle" fontSize="6.5" fill="#9CA3AF">
-              {n.title.includes('·') ? `·${n.title.split('·')[1]}` : n.title.split(' ')[1] || ''}
-            </text>
-          </g>
-        ))}
-
-        {/* Center circle */}
-        <circle cx={cx} cy={cy} r={innerR + 4} fill="white" opacity="0.3" />
-        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" filter="url(#centerGlow)" />
-        <circle cx={cx} cy={cy} r={innerR} fill="white" fillOpacity="0.07" />
-
-        {/* Center logo */}
-        <image
-          href="/img/itda_logo_White_main.png"
-          x={cx - 40} y={cy - 24}
-          width="80" height="48"
-          preserveAspectRatio="xMidYMid meet"
-        />
-        <text x={cx} y={cy + 30} textAnchor="middle" fontSize="8.5" fill="rgba(255,255,255,0.7)" fontWeight="500">
-          절차 연결 플랫폼
-        </text>
 
         {/* Dot accents on lines */}
         {nodes.map((n, i) => {
           const mx = cx + (n.x - cx) * 0.55
           const my = cy + (n.y - cy) * 0.55
+          return <circle key={i} cx={mx} cy={my} r={5} fill="url(#centerGrad)" opacity="0.75" />
+        })}
+
+        {/* ── Category nodes ── */}
+        {nodes.map((n, i) => {
+          const isHovered = hoveredIdx === i
           return (
-            <circle key={i} cx={mx} cy={my} r={3} fill="url(#centerGrad)" opacity="0.8" />
+            <g
+              key={i}
+              filter={isHovered ? 'url(#nodeHoverShadow)' : 'url(#nodeShadow)'}
+              style={{
+                cursor: 'pointer',
+                transformOrigin: `${n.x}px ${n.y}px`,
+                transform: isHovered ? 'scale(1.22)' : 'scale(1)',
+                transition: 'transform 0.22s cubic-bezier(0.34,1.56,0.64,1)',
+              }}
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+            >
+              {/* Node circle */}
+              <circle
+                cx={n.x} cy={n.y} r={44}
+                fill="white"
+                stroke={isHovered ? 'url(#centerGrad)' : '#E8F0FE'}
+                strokeWidth={isHovered ? 2.5 : 1.5}
+              />
+              {/* Icon */}
+              <text
+                x={n.x} y={n.y - 11}
+                textAnchor="middle"
+                fontSize="22"
+                dominantBaseline="middle"
+              >
+                {n.icon}
+              </text>
+              {/* 카테고리 제목 (앞부분) */}
+              <text
+                x={n.x} y={n.y + 14}
+                textAnchor="middle"
+                fontSize="12"
+                fill={isHovered ? '#007A68' : '#1A2035'}
+                fontWeight="700"
+                fontFamily="'Noto Sans KR', sans-serif"
+              >
+                {n.title.split('·')[0]}
+              </text>
+              {/* 카테고리 부제 (뒷부분) */}
+              <text
+                x={n.x} y={n.y + 29}
+                textAnchor="middle"
+                fontSize="10"
+                fill="#9CA3AF"
+                fontFamily="'Noto Sans KR', sans-serif"
+              >
+                {n.title.includes('·')
+                  ? `·${n.title.split('·')[1]}`
+                  : (n.title.split(' ').slice(1).join(' ') || '')}
+              </text>
+            </g>
           )
         })}
+
+        {/* ── Center circle ── */}
+        <circle cx={cx} cy={cy} r={innerR + 7} fill="white" opacity="0.22" />
+        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" filter="url(#centerGlow)" />
+        <circle cx={cx} cy={cy} r={innerR} fill="white" fillOpacity="0.06" />
+
+        {/* Center logo */}
+        <image
+          href="/img/itda_logo_White_main.png"
+          x={cx - 50} y={cy - 28}
+          width="100" height="56"
+          preserveAspectRatio="xMidYMid meet"
+        />
+
+        {/* Center label — 배경 pill + 흰 텍스트 */}
+        <rect
+          x={cx - 44} y={cy + 33}
+          width="88" height="22"
+          rx="11"
+          fill="rgba(0,0,0,0.22)"
+        />
+        <text
+          x={cx} y={cy + 48}
+          textAnchor="middle"
+          fontSize="11.5"
+          fill="white"
+          fontWeight="700"
+          fontFamily="'Noto Sans KR', sans-serif"
+          filter="url(#textGlow)"
+        >
+          절차 연결 플랫폼
+        </text>
       </svg>
     </div>
   )
@@ -131,11 +198,12 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
+    /* max-w-screen-xl = 1280px, 초대형 화면도 중앙 정렬 */
     <div className="min-h-screen bg-white font-sans">
 
       {/* ═══ NAVBAR ═══ */}
       <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
@@ -212,11 +280,12 @@ export default function App() {
         className="pt-16 min-h-screen flex items-center"
         style={{ background: 'linear-gradient(135deg, #F0FFFD 0%, #FFFFFF 50%, #EEF4FF 100%)' }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+        {/* max-w-6xl = 1152px — 초대형 화면에서도 중앙에 고정 */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16 xl:gap-20">
 
             {/* ── Left: Text ── */}
-            <div className="flex-1 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
+            <div className="flex-1 min-w-0 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
 
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#00C8A5]/40 shadow-sm mb-7">
@@ -267,7 +336,7 @@ export default function App() {
             </div>
 
             {/* ── Right: Hub Diagram ── */}
-            <div className="flex-1 w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px]">
+            <div className="flex-shrink-0 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] xl:max-w-[460px]">
               <HubDiagram />
             </div>
           </div>
@@ -276,7 +345,7 @@ export default function App() {
 
       {/* ═══ CATEGORY CARDS ═══ */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-7">
             <h2 className="text-lg sm:text-xl font-black text-[#1A2035]">
               필요한 절차를 빠르게 찾아보세요
@@ -291,7 +360,6 @@ export default function App() {
               <button
                 key={i}
                 className="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-2xl border-2 border-gray-100 bg-white text-center transition-all duration-200 hover:border-[#00C8A5]/50 hover:shadow-lg hover:-translate-y-1.5"
-                style={{ '--tw-shadow-color': '#00C8A520' }}
               >
                 <span className="text-3xl group-hover:scale-110 transition-transform duration-200">
                   {cat.icon}
@@ -315,7 +383,7 @@ export default function App() {
         className="py-12"
         style={{ background: 'linear-gradient(135deg, #00C8A5 0%, #0057B8 100%)' }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
               <p className="text-white/75 text-sm font-medium mb-1.5">혼자 진행하기 어렵다면</p>
@@ -341,7 +409,7 @@ export default function App() {
 
       {/* ═══ FOOTER ═══ */}
       <footer className="bg-[#1A2035] py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <img
               src="/img/itda_logo_White_main.png"
