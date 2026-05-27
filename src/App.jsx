@@ -117,17 +117,14 @@ function HubDiagram() {
           )
         })}
 
-        {/* ── 가운데 원: 그라디언트 링 + 흰 내원 + 컬러 로고 ── */}
-        {/* 그라디언트 링 (그림자 포함) */}
-        <circle cx={cx} cy={cy} r={innerR + 8}
-          fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        {/* 흰색 내원 */}
-        <circle cx={cx} cy={cy} r={innerR} fill="white" />
-        {/* 그라디언트 로고 (컬러 그대로 흰 원 위에) */}
+        {/* ── 가운데 원: 그라디언트 배경 + 화이트 로고 ── */}
+        <circle cx={cx} cy={cy} r={innerR + 8} fill="url(#ringGrad)" filter="url(#centerShadow)" />
+        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
+        {/* 화이트 로고 — 필터 없이 그대로 (흰색 PNG on 그라디언트) */}
         <image
-          href="/img/itda_logo_gradation.png"
-          x={cx - 52} y={cy - 24}
-          width="104" height="48"
+          href="/img/itda_logo_white.png"
+          x={cx - 54} y={cy - 26}
+          width="108" height="52"
           preserveAspectRatio="xMidYMid meet"
         />
       </svg>
@@ -365,7 +362,7 @@ export default function App() {
       <footer className="bg-[#1A2035] py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <img src="/img/itda_logo_white.png" alt="잇다"
+            <img src="/img/itda_logo_black.png" alt="잇다"
               className="h-7 w-auto object-contain mb-2"
               onError={e => { e.currentTarget.style.display = 'none' }} />
             <p className="text-sm text-gray-500">흩어진 절차를, 한 곳으로 · © 2026 잇다</p>
