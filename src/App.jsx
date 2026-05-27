@@ -117,14 +117,16 @@ function HubDiagram() {
           )
         })}
 
-        {/* ── 가운데 원: 그라디언트 배경 + 화이트 로고 ── */}
-        <circle cx={cx} cy={cy} r={innerR + 8} fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
-        {/* 화이트 로고 — 필터 없이 그대로 (흰색 PNG on 그라디언트) */}
+        {/* ── 가운데 원: 그라디언트 링 + 흰 내원 + 그라디언트 로고 ── */}
+        {/* 로고 그라디언트와 통일된 링 */}
+        <circle cx={cx} cy={cy} r={innerR + 10} fill="url(#ringGrad)" filter="url(#centerShadow)" />
+        {/* 흰 내원 (로고 컬러가 선명하게 보이도록) */}
+        <circle cx={cx} cy={cy} r={innerR} fill="white" />
+        {/* 그라디언트 로고 (새로 저장된 파일) */}
         <image
-          href="/img/itda_logo_white.png"
-          x={cx - 54} y={cy - 26}
-          width="108" height="52"
+          href="/img/itda_logo_gradation.png"
+          x={cx - 52} y={cy - 22}
+          width="104" height="44"
           preserveAspectRatio="xMidYMid meet"
         />
       </svg>
@@ -143,12 +145,11 @@ export default function App() {
       <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* 로고: 흰 배경에 어울리는 컬러/블랙 버전 */}
+            {/* 로고: 화이트 메인 로고 */}
             <div className="flex-shrink-0">
-              <img src="/img/itda_logo_black.png" alt="잇다"
-                className="h-8 w-auto object-contain"
+              <img src="/img/itda_logo_White_main.png" alt="잇다"
+                className="h-10 w-auto object-contain"
                 onError={e => {
-                  // fallback: gradation 버전
                   e.currentTarget.src = '/img/itda_logo_gradation.png'
                   e.currentTarget.onerror = null
                 }}
