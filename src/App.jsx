@@ -59,9 +59,14 @@ function HubDiagram() {
           <filter id="nodeHoverShadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="7" stdDeviation="14" floodColor="#00C8A545" />
           </filter>
-          {/* 가운데 흰 원 그림자 */}
+          {/* 가운데 원 그림자 */}
           <filter id="centerShadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="4" stdDeviation="10" floodColor="#0057B830" />
+          </filter>
+          {/* 로고를 흰색으로 변환 (투명 영역은 그대로 유지) */}
+          <filter id="toWhite" x="0%" y="0%" width="100%" height="100%">
+            <feFlood floodColor="white" result="whiteFlood"/>
+            <feComposite in="whiteFlood" in2="SourceGraphic" operator="in"/>
           </filter>
         </defs>
 
@@ -117,17 +122,17 @@ function HubDiagram() {
           )
         })}
 
-        {/* ── 가운데 원: 그라디언트 링 + 흰 내원 + 그라디언트 로고 ── */}
-        {/* 로고 그라디언트와 통일된 링 */}
+        {/* ── 가운데 원: 그라디언트 배경 + 흰색 잇다 로고 ── */}
         <circle cx={cx} cy={cy} r={innerR + 10} fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        {/* 흰 내원 (로고 컬러가 선명하게 보이도록) */}
-        <circle cx={cx} cy={cy} r={innerR} fill="white" />
-        {/* 그라디언트 로고 (새로 저장된 파일) */}
+        {/* 그라디언트 원 (배경) */}
+        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
+        {/* 잇다 로고 → toWhite 필터로 흰색 변환 (투명 유지) */}
         <image
           href="/img/itda_logo_gradation.png"
           x={cx - 52} y={cy - 22}
           width="104" height="44"
           preserveAspectRatio="xMidYMid meet"
+          filter="url(#toWhite)"
         />
       </svg>
     </div>
