@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ApplyModal from './components/ApplyModal'
 
 /* ── 데이터 ── */
 const CATEGORIES = [
@@ -142,6 +143,10 @@ function HubDiagram() {
 /* ── Main App ── */
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [applyOpen, setApplyOpen] = useState(false)
+  const [applyType, setApplyType] = useState('free')
+
+  const openApply = (type = 'free') => { setApplyType(type); setApplyOpen(true) }
 
   return (
     <div className="min-h-screen bg-white">
@@ -177,7 +182,7 @@ export default function App() {
 
             <div className="hidden md:flex items-center gap-3">
               <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">로그인</a>
-              <button className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-btn shadow-md hover:opacity-90 transition-opacity"
+              <button onClick={() => openApply('free')} className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-btn shadow-md hover:opacity-90 transition-opacity"
                 style={{ letterSpacing: '-0.01em' }}>
                 무료로 절차 찾기
               </button>
@@ -201,7 +206,7 @@ export default function App() {
             ))}
             <div className="pt-3 flex flex-col gap-2">
               <a href="#" className="text-center text-sm text-gray-500 py-2">로그인</a>
-              <button className="w-full py-3 text-sm font-bold text-white rounded-full gradient-btn">무료로 절차 찾기</button>
+              <button onClick={() => openApply('free')} className="w-full py-3 text-sm font-bold text-white rounded-full gradient-btn">무료로 절차 찾기</button>
             </div>
           </div>
         )}
@@ -257,6 +262,7 @@ export default function App() {
               {/* CTA 버튼 */}
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <button
+                  onClick={() => openApply('free')}
                   className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
                   style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
                 >
@@ -355,7 +361,7 @@ export default function App() {
                   39,000<span className="text-base font-bold ml-0.5">원</span>
                 </div>
               </div>
-              <button className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap"
+              <button onClick={() => openApply('premium')} className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap"
                 style={{ letterSpacing: '-0.01em' }}>
                 도움 요청하기 →
               </button>
@@ -381,6 +387,11 @@ export default function App() {
         </div>
       </footer>
 
+      <ApplyModal
+        open={applyOpen}
+        onClose={() => setApplyOpen(false)}
+        defaultType={applyType}
+      />
     </div>
   )
 }
