@@ -122,17 +122,17 @@ function HubDiagram() {
           )
         })}
 
-        {/* ── 가운데 원: 그라디언트 배경 + 흰색 잇다 로고 ── */}
+        {/* ── 가운데 원: 그라디언트 배경 + 그라디언트 배지 로고 ── */}
+        {/* 그림자 링 */}
         <circle cx={cx} cy={cy} r={innerR + 10} fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        {/* 그라디언트 원 (배경) */}
+        {/* 그라디언트 원 배경 */}
         <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
-        {/* 잇다 로고 → toWhite 필터로 흰색 변환 (투명 유지) */}
+        {/* 그라디언트 배지 로고 — 필터 없이 그대로 (같은 그라디언트 계열이라 자연스럽게 어울림) */}
         <image
           href="/img/itda_logo_gradation.png"
-          x={cx - 52} y={cy - 22}
-          width="104" height="44"
+          x={cx - 56} y={cy - 36}
+          width="112" height="72"
           preserveAspectRatio="xMidYMid meet"
-          filter="url(#toWhite)"
         />
       </svg>
     </div>
@@ -149,13 +149,17 @@ export default function App() {
       {/* ═══ NAVBAR ═══ */}
       <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* 로고: 화이트 메인 로고 */}
+          <div className="flex items-center justify-between h-20">
+            {/* 로고: 화이트 메인 — mix-blend-mode:multiply로 흰 배경 투명처럼 처리 */}
             <div className="flex-shrink-0">
-              <img src="/img/itda_logo_White_main.png" alt="잇다"
-                className="h-10 w-auto object-contain"
+              <img
+                src="/img/itda_logo_White_main.png"
+                alt="잇다"
+                className="h-14 w-auto object-contain"
+                style={{ mixBlendMode: 'multiply' }}
                 onError={e => {
                   e.currentTarget.src = '/img/itda_logo_gradation.png'
+                  e.currentTarget.style.mixBlendMode = 'normal'
                   e.currentTarget.onerror = null
                 }}
               />
