@@ -2,17 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { CATEGORIES, SERVICES, DIFFICULTY } from '../../data/services'
+import LogoIcon from '../../components/LogoIcon'
 
 const STORAGE_KEY = 'itda_checklist_v1'
-
-function LogoIcon({ service, size = 40 }) {
-  return (
-    <div className="rounded-xl flex items-center justify-center flex-shrink-0"
-      style={{ width: size, height: size, backgroundColor: service.color }}>
-      <span style={{ fontSize: size * 0.44 }}>{service.emoji}</span>
-    </div>
-  )
-}
 
 function DiffBadge({ difficulty }) {
   const d = DIFFICULTY[difficulty]

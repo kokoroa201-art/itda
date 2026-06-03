@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SERVICES, CATEGORIES, DIFFICULTY } from '../../../data/services'
+import LogoIcon from '../../../components/LogoIcon'
 
 export function generateStaticParams() {
   return SERVICES.map(s => ({ id: s.id }))
@@ -52,10 +53,7 @@ export default async function ServiceDetailPage({ params }) {
 
         {/* 아이콘 + 제목 */}
         <div className="flex items-start gap-4 mb-5">
-          <div className="rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm"
-            style={{ width: 64, height: 64, backgroundColor: service.color }}>
-            <span style={{ fontSize: '1.9rem' }}>{service.emoji}</span>
-          </div>
+          <LogoIcon service={service} size={64} />
           <div className="pt-0.5 min-w-0">
             <h1 className="text-2xl font-black text-[#1A1A1A] leading-tight"
               style={{ letterSpacing: '-0.03em' }}>

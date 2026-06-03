@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { CATEGORIES, SERVICES, DIFFICULTY } from '../../data/services'
+import LogoIcon from '../../components/LogoIcon'
 
 function DiffBadge({ difficulty }) {
   const d = DIFFICULTY[difficulty]
@@ -11,15 +12,6 @@ function DiffBadge({ difficulty }) {
       style={{ backgroundColor: d.bg, color: d.color }}>
       {d.label}
     </span>
-  )
-}
-
-function LogoIcon({ service, size = 44 }) {
-  return (
-    <div className="rounded-xl flex items-center justify-center flex-shrink-0"
-      style={{ width: size, height: size, backgroundColor: service.color }}>
-      <span style={{ fontSize: size * 0.46 }}>{service.emoji}</span>
-    </div>
   )
 }
 
