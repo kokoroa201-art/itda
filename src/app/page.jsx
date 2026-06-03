@@ -314,17 +314,16 @@ export default function HomePage() {
                 필요한 절차를 처음부터 끝까지 함께 진행합니다
               </p>
             </div>
-            <div className="flex items-center gap-5 flex-shrink-0">
-              <div className="text-right">
-                <div className="text-white/60 text-sm line-through mb-0.5">100,000원</div>
-                <div className="text-white text-3xl font-black" style={{ letterSpacing: '-0.03em' }}>
-                  39,000<span className="text-base font-bold ml-0.5">원</span>
-                </div>
+            <div className="flex flex-col items-center sm:items-end gap-3 flex-shrink-0">
+              <div className="flex gap-2 text-sm text-white/70 flex-wrap justify-center sm:justify-end">
+                <span className="px-3 py-1 rounded-full bg-white/15">📄 서류 작성 도움</span>
+                <span className="px-3 py-1 rounded-full bg-white/15">⚖️ 법무사·세무사 연결</span>
+                <span className="px-3 py-1 rounded-full bg-white/15">💬 전문 상담 지원</span>
               </div>
               <button onClick={() => openApply('premium')}
                 className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap"
                 style={{ letterSpacing: '-0.01em' }}>
-                도움 요청하기 →
+                문의하기 →
               </button>
             </div>
           </div>

@@ -47,7 +47,7 @@ export default function ServicesPage() {
           <h1 className="text-xl font-black text-[#1A2035] mb-0.5" style={{ letterSpacing: '-0.035em' }}>
             해지 안내
           </h1>
-          <p className="text-sm text-gray-400 mb-4">서비스를 눌러 절차를 확인하세요 — 모두 무료</p>
+          <p className="text-sm text-gray-400 mb-4">서비스를 눌러 절차를 확인하세요 — 정보 찾기는 무료</p>
 
           {/* 검색 */}
           <div className="relative mb-3">

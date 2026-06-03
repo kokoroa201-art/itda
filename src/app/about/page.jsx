@@ -139,7 +139,7 @@ export default function AboutPage() {
             {[
               { num:'35+', unit:'개', label:'안내 서비스' },
               { num:'6',   unit:'개', label:'처리 카테고리' },
-              { num:'100', unit:'%', label:'무료 절차 안내' },
+              { num:'0', unit:'원', label:'정보 찾기 비용' },
               { num:'3',   unit:'단계', label:'간단한 이용 방법' },
             ].map((s, i) => (
               <div key={i} className="text-center p-6 rounded-2xl border border-gray-100">

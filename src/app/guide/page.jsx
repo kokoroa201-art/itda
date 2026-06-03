@@ -278,7 +278,7 @@ export default function GuidePage() {
               <p className="text-white font-black text-lg" style={{ letterSpacing: '-0.03em' }}>
                 전문가의 도움을 받으세요
               </p>
-              <p className="text-white/60 text-xs mt-1">법무사·변호사 연결 서비스 39,000원</p>
+              <p className="text-white/60 text-xs mt-1">서류 작성 도움 · 법무사·세무사 연결 · 상담 지원</p>
             </div>
             <Link href="/"
               className="flex-shrink-0 px-6 py-3 bg-white rounded-full font-bold text-sm hover:-translate-y-0.5 transition-all shadow-md"
