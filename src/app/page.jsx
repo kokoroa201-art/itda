@@ -2,132 +2,22 @@
 
 import { useState } from 'react'
 import ApplyModal from '../components/ApplyModal'
+import { CATEGORIES } from '../data/services'
 
-const CATEGORIES = [
-  { icon: '🏦', nodeL1: '금융',    nodeL2: '계좌',        title: '금융·계좌',        desc: '계좌 정리, 연금, 보험' },
-  { icon: '📱', nodeL1: '통신',    nodeL2: '요금',        title: '통신·요금',        desc: '이동통신, 인터넷, 요금제' },
-  { icon: '🏛️', nodeL1: '정부24', nodeL2: '행정',        title: '정부24·행정',      desc: '상속, 사망신고, 행정절차' },
-  { icon: '💬', nodeL1: 'SNS',     nodeL2: '디지털 계정', title: 'SNS·디지털 계정',  desc: '카카오, 네이버, 구글' },
-  { icon: '🔄', nodeL1: '구독',    nodeL2: '서비스 확인', title: '구독 서비스 확인', desc: '스트리밍, 쇼핑몰, 앱' },
-  { icon: '📋', nodeL1: '상속',    nodeL2: '준비 서류',   title: '상속 준비 서류',   desc: '필요 서류 한눈에 확인' },
+const NAV_LINKS = [
+  { label: '무료 절차 안내', href: '/services' },
+  { label: '자주 묻는 질문', href: '#faq' },
+  { label: '고객센터',       href: '#' },
 ]
 
 const TRUST = [
   { emoji: '🛡️', title: '신뢰할 수 있는 정보', desc: '공공기관·공식 기관 기반' },
   { emoji: '⏱️', title: '시간 절약',           desc: '여러 사이트 한 번에' },
   { emoji: '📄', title: '쉬운 절차 안내',       desc: '단계별로 쉽게 안내' },
-  { emoji: '🔒', title: '개인정보 보호',        desc: '안심하고 이용할 수 있는 보안' },
+  { emoji: '🔒', title: '개인정보 보호',        desc: '안심하고 이용 가능' },
 ]
 
-const NAV_LINKS = ['서비스 소개', '절차 가이드', '카테고리', '자주 묻는 질문', '고객센터']
-
-function HubDiagram() {
-  const [hoveredIdx, setHoveredIdx] = useState(null)
-  const cx = 250, cy = 250, outerR = 168, innerR = 74
-
-  const nodes = CATEGORIES.map((cat, i) => {
-    const angle = (i * 60 - 90) * Math.PI / 180
-    return {
-      ...cat,
-      x: Math.round(cx + outerR * Math.cos(angle)),
-      y: Math.round(cy + outerR * Math.sin(angle)),
-    }
-  })
-
-  return (
-    <div className="relative w-full max-w-[460px] mx-auto select-none">
-      <div className="absolute inset-0 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #00C8A5 0%, #0057B8 100%)' }} />
-
-      <svg viewBox="0 0 500 500" className="relative w-full drop-shadow-sm">
-        <defs>
-          <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00C8A5" />
-            <stop offset="100%" stopColor="#0057B8" />
-          </linearGradient>
-          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00C8A5" />
-            <stop offset="100%" stopColor="#0057B8" />
-          </linearGradient>
-          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00C8A5" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#0057B8" stopOpacity="0.4" />
-          </linearGradient>
-          <filter id="nodeShadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#00000015" />
-          </filter>
-          <filter id="nodeHoverShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="7" stdDeviation="14" floodColor="#00C8A545" />
-          </filter>
-          <filter id="centerShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="10" floodColor="#0057B830" />
-          </filter>
-          <filter id="toWhite" x="0%" y="0%" width="100%" height="100%">
-            <feFlood floodColor="white" result="whiteFlood"/>
-            <feComposite in="whiteFlood" in2="SourceGraphic" operator="in"/>
-          </filter>
-        </defs>
-
-        <circle cx={cx} cy={cy} r={outerR + 18}
-          fill="none" stroke="#D8ECFF" strokeWidth="1.5" strokeDasharray="4,9" opacity="0.6" />
-
-        {nodes.map((n, i) => (
-          <line key={i} x1={cx} y1={cy} x2={n.x} y2={n.y}
-            stroke="url(#lineGrad)" strokeWidth="1.5" strokeDasharray="6,5" opacity="0.6" />
-        ))}
-
-        {nodes.map((n, i) => {
-          const mx = cx + (n.x - cx) * 0.55
-          const my = cy + (n.y - cy) * 0.55
-          return <circle key={i} cx={mx} cy={my} r={4.5} fill="url(#centerGrad)" opacity="0.7" />
-        })}
-
-        {nodes.map((n, i) => {
-          const isHov = hoveredIdx === i
-          const col = isHov ? '#007A68' : '#1A2035'
-          return (
-            <g key={i}
-              filter={isHov ? 'url(#nodeHoverShadow)' : 'url(#nodeShadow)'}
-              style={{
-                cursor: 'pointer',
-                transformOrigin: `${n.x}px ${n.y}px`,
-                transform: isHov ? 'scale(1.22)' : 'scale(1)',
-                transition: 'transform 0.22s cubic-bezier(0.34,1.56,0.64,1)',
-              }}
-              onMouseEnter={() => setHoveredIdx(i)}
-              onMouseLeave={() => setHoveredIdx(null)}
-            >
-              <circle cx={n.x} cy={n.y} r={46} fill="white"
-                stroke={isHov ? 'url(#centerGrad)' : '#E5EFFF'}
-                strokeWidth={isHov ? 2.5 : 1.5} />
-              <text x={n.x} y={n.y - 13} textAnchor="middle"
-                fontSize="22" dominantBaseline="middle">{n.icon}</text>
-              <text x={n.x} y={n.y + 12} textAnchor="middle"
-                fontSize="13.5" fill={col} fontWeight="800"
-                fontFamily="'Pretendard', 'Noto Sans KR', sans-serif">
-                {n.nodeL1}
-              </text>
-              <text x={n.x} y={n.y + 28} textAnchor="middle"
-                fontSize="12" fill={col} fontWeight="700"
-                fontFamily="'Pretendard', 'Noto Sans KR', sans-serif">
-                {n.nodeL2}
-              </text>
-            </g>
-          )
-        })}
-
-        <circle cx={cx} cy={cy} r={innerR + 10} fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
-        <image
-          href="/img/itda_logo_gradation.png"
-          x={cx - 56} y={cy - 36}
-          width="112" height="72"
-          preserveAspectRatio="xMidYMid meet"
-        />
-      </svg>
-    </div>
-  )
-}
+const SERVICE_CATS = CATEGORIES.filter(c => c.id !== 'all')
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -139,15 +29,15 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ═══ NAVBAR ═══ */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
-            <div className="flex-shrink-0">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <a href="/" className="flex-shrink-0">
               <img
                 src="/img/itda_logo_White_main.png"
                 alt="잇다"
-                className="h-20 w-auto object-contain"
+                className="h-16 w-auto object-contain"
                 style={{ mixBlendMode: 'multiply' }}
                 onError={e => {
                   e.currentTarget.src = '/img/itda_logo_gradation.png'
@@ -155,30 +45,32 @@ export default function HomePage() {
                   e.currentTarget.onerror = null
                 }}
               />
-            </div>
+            </a>
 
-            <div className="hidden md:flex items-center gap-7">
-              {NAV_LINKS.map(link => (
-                <a key={link} href="#"
+            <div className="hidden md:flex items-center gap-8">
+              {NAV_LINKS.map(l => (
+                <a key={l.label} href={l.href}
                   className="text-sm font-medium text-gray-500 hover:text-[#0057B8] transition-colors"
                   style={{ letterSpacing: '-0.01em' }}>
-                  {link}
+                  {l.label}
                 </a>
               ))}
             </div>
 
             <div className="hidden md:flex items-center gap-3">
-              <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">로그인</a>
-              <button onClick={() => openApply('free')}
+              <button onClick={() => openApply('premium')}
+                className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">
+                전문가 도움
+              </button>
+              <a href="/services"
                 className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-btn shadow-md hover:opacity-90 transition-opacity"
                 style={{ letterSpacing: '-0.01em' }}>
-                무료로 절차 찾기
-              </button>
+                무료 절차 찾기
+              </a>
             </div>
 
             <button onClick={() => setMenuOpen(v => !v)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-50"
-              aria-label="메뉴">
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-50">
               <span className="text-xl leading-none">{menuOpen ? '✕' : '☰'}</span>
             </button>
           </div>
@@ -186,71 +78,89 @@ export default function HomePage() {
 
         {menuOpen && (
           <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-1">
-            {NAV_LINKS.map(link => (
-              <a key={link} href="#"
+            {NAV_LINKS.map(l => (
+              <a key={l.label} href={l.href}
                 className="block py-2.5 text-sm font-medium text-gray-700 border-b border-gray-50 last:border-0">
-                {link}
+                {l.label}
               </a>
             ))}
             <div className="pt-3 flex flex-col gap-2">
-              <a href="#" className="text-center text-sm text-gray-500 py-2">로그인</a>
-              <button onClick={() => openApply('free')}
-                className="w-full py-3 text-sm font-bold text-white rounded-full gradient-btn">
-                무료로 절차 찾기
+              <a href="/services"
+                className="w-full py-3 text-sm font-bold text-white rounded-full gradient-btn text-center">
+                무료 절차 찾기
+              </a>
+              <button onClick={() => { setMenuOpen(false); openApply('premium') }}
+                className="w-full py-3 text-sm font-semibold text-[#0057B8] rounded-full border-2 border-[#0057B8]/30">
+                전문가 도움 받기
               </button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* ═══ HERO ═══ */}
+      {/* ── HERO ── */}
       <section
-        className="pt-24 min-h-screen flex items-center"
-        style={{ background: 'linear-gradient(135deg, #EDFFF9 0%, #FFFFFF 45%, #EEF4FF 100%)' }}
+        className="pt-20 min-h-screen flex items-center"
+        style={{ background: 'linear-gradient(150deg, #EDFFF9 0%, #FFFFFF 50%, #EEF4FF 100%)' }}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
-          <div className="flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16">
-            <div className="flex-1 min-w-0 flex flex-col justify-center text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#00C8A5]/40 shadow-sm mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#00C8A5] animate-pulse" />
-                <span className="text-sm font-semibold text-[#007A68]" style={{ letterSpacing: '-0.01em' }}>
-                  사망 이후 절차 안내 플랫폼
-                </span>
-              </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+          <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
 
-              <h1 className="font-black text-[#1A2035] mb-6"
-                style={{ fontSize: 'clamp(2.4rem, 5vw, 3.5rem)', lineHeight: 1.1, letterSpacing: '-0.04em' }}>
-                복잡한 절차,<br />
-                <span className="gradient-text">한 곳에서 잇다</span>
-              </h1>
-
-              <p className="text-gray-500 mb-8"
-                style={{ fontSize: '1.0625rem', lineHeight: 1.85, letterSpacing: '-0.01em' }}>
-                흩어진 정보와 여러 사이트를 찾아다니지 마세요.
-                사망 이후 필요한 절차와 기관을{' '}
-                <strong className="text-[#1A2035] font-semibold">쉽고 빠르게 안내</strong>해드립니다.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <button onClick={() => openApply('free')}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
-                  style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                  무료로 절차 찾기 →
-                </button>
-                <button
-                  className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
-                  style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                  서비스 둘러보기
-                </button>
-              </div>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#00C8A5]/40 shadow-sm mb-8">
+              <span className="w-2 h-2 rounded-full bg-[#00C8A5] animate-pulse" />
+              <span className="text-sm font-semibold text-[#007A68]" style={{ letterSpacing: '-0.01em' }}>
+                사망 이후 절차 안내 플랫폼
+              </span>
             </div>
 
-            <div className="flex-shrink-0 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] mx-auto lg:mx-0">
-              <HubDiagram />
+            <h1 className="font-black text-[#1A2035] mb-5"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', lineHeight: 1.15, letterSpacing: '-0.04em' }}>
+              힘드실 때,<br />
+              <span className="gradient-text">잇다가 함께합니다</span>
+            </h1>
+
+            <p className="text-gray-500 mb-10"
+              style={{ fontSize: '1.05rem', lineHeight: 1.85, letterSpacing: '-0.01em' }}>
+              가족을 잃은 후 처리해야 할 절차들이 막막하실 거예요.<br />
+              금융, 통신, 정부 처리까지{' '}
+              <strong className="text-[#1A2035] font-semibold">단계별로 쉽게 안내</strong>해드립니다.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-12">
+              <a href="/services"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
+                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
+                무료로 절차 확인하기 →
+              </a>
+              <button onClick={() => openApply('premium')}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
+                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
+                전문가 도움 받기
+              </button>
+            </div>
+
+            {/* 카테고리 바로가기 */}
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
+              {SERVICE_CATS.map(cat => (
+                <a key={cat.id} href={`/services?cat=${cat.id}`}
+                  className="flex flex-col items-center gap-1.5 py-3.5 px-2 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#00C8A5]/40 transition-all">
+                  <span className="text-xl">{cat.emoji}</span>
+                  <span className="text-xs font-semibold text-gray-600 text-center leading-tight"
+                    style={{ letterSpacing: '-0.01em' }}>
+                    {cat.label}
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-14 pt-10 border-t border-gray-100/80 grid grid-cols-2 sm:grid-cols-4 gap-6">
+      {/* ── 신뢰 지표 ── */}
+      <section className="py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {TRUST.map((t, i) => (
               <div key={i} className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-[#00C8A5]/15 to-[#0057B8]/15 flex items-center justify-center text-lg">
@@ -260,7 +170,7 @@ export default function HomePage() {
                   <div className="font-bold text-[#1A2035]"
                     style={{ fontSize: '0.875rem', letterSpacing: '-0.02em' }}>{t.title}</div>
                   <div className="text-gray-500 mt-0.5"
-                    style={{ fontSize: '0.8rem', letterSpacing: '-0.01em', lineHeight: 1.5 }}>{t.desc}</div>
+                    style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>{t.desc}</div>
                 </div>
               </div>
             ))}
@@ -268,47 +178,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ CATEGORY CARDS ═══ */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl sm:text-2xl font-black text-[#1A2035]" style={{ letterSpacing: '-0.03em' }}>
-              필요한 절차를 빠르게 찾아보세요
-            </h2>
-            <button className="text-sm font-semibold text-[#0057B8] hover:text-[#00C8A5] transition-colors">
-              모든 카테고리 보기 →
-            </button>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-            {CATEGORIES.map((cat, i) => (
-              <button key={i}
-                className="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-gray-100 bg-white text-center transition-all duration-200 hover:border-[#00C8A5]/50 hover:shadow-lg hover:-translate-y-1.5">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-200">{cat.icon}</span>
-                <div>
-                  <div className="font-bold text-[#1A2035] group-hover:text-[#007A68] transition-colors"
-                    style={{ fontSize: '0.875rem', letterSpacing: '-0.02em' }}>{cat.title}</div>
-                  <div className="text-gray-400 mt-1" style={{ fontSize: '0.75rem', lineHeight: 1.4 }}>{cat.desc}</div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ PAID BANNER ═══ */}
+      {/* ── 유료 배너 ── */}
       <section className="py-14" style={{ background: 'linear-gradient(135deg, #00C8A5 0%, #0057B8 100%)' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
-              <p className="text-white/80 text-base font-medium mb-2" style={{ letterSpacing: '-0.01em' }}>
-                혼자 진행하기 어렵다면
-              </p>
+              <p className="text-white/80 text-base font-medium mb-2">혼자 진행하기 어렵다면</p>
               <h3 className="text-2xl font-black text-white" style={{ letterSpacing: '-0.03em' }}>
                 전문가가 직접 도와드립니다
               </h3>
-              <p className="text-white/70 text-base mt-2" style={{ letterSpacing: '-0.01em' }}>
-                필요한 절차를 처음부터 끝까지 함께 진행합니다
-              </p>
+              <p className="text-white/70 text-base mt-2">필요한 절차를 처음부터 끝까지 함께 진행합니다</p>
             </div>
             <div className="flex items-center gap-5 flex-shrink-0">
               <div className="text-right">
@@ -318,8 +197,7 @@ export default function HomePage() {
                 </div>
               </div>
               <button onClick={() => openApply('premium')}
-                className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap"
-                style={{ letterSpacing: '-0.01em' }}>
+                className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap">
                 도움 요청하기 →
               </button>
             </div>
@@ -327,9 +205,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ FOOTER ═══ */}
+      {/* ── FOOTER ── */}
       <footer className="bg-[#010C26] py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <img src="/img/itda_logo_black.png" alt="잇다"
               className="h-7 w-auto object-contain mb-2"
@@ -344,11 +222,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <ApplyModal
-        open={applyOpen}
-        onClose={() => setApplyOpen(false)}
-        defaultType={applyType}
-      />
+      <ApplyModal open={applyOpen} onClose={() => setApplyOpen(false)} defaultType={applyType} />
     </div>
   )
 }
