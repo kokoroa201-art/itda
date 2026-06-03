@@ -50,7 +50,7 @@ export const SERVICES = [
       { text: '신청인(상속인) 신분증', required: true },
     ],
     link: 'https://www.gov.kr/portal/onestop',
-    linkLabel: '정부24 상속 원스톱 신청하기',
+    linkLabel: '정부24 상속 원스톱 신청 바로가기',
     note: '정부24 로그인 후 「사망에 따른 각종 처리」를 검색하면 원스톱 서비스를 바로 찾을 수 있습니다.',
   },
   {
@@ -75,8 +75,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.nhis.or.kr',
-    linkLabel: '국민건강보험공단 바로가기',
+    link: 'https://www.nhis.or.kr/nhis/minwon/retrieveReport.do',
+    linkLabel: '건강보험 민원 신청 바로가기',
   },
   {
     id: 'nps',
@@ -101,8 +101,8 @@ export const SERVICES = [
       { text: '수급 계좌 통장 사본', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.nps.or.kr',
-    linkLabel: '국민연금공단 바로가기',
+    link: 'https://minwon.nps.or.kr/jsppage/min/civil_affairs/CA0101M01.jsp',
+    linkLabel: '유족연금 온라인 신청 바로가기',
   },
 
   // ────────────────────────────────────────────────────────────
@@ -133,8 +133,8 @@ export const SERVICES = [
       { text: '신청인(상속인) 신분증', required: true },
       { text: '통장 사본 (잔액 환급 시)', required: false },
     ],
-    link: 'https://cs.kakao.com',
-    linkLabel: '카카오 고객센터 바로가기',
+    link: 'https://cs.kakao.com/requests?service=10&locale=ko',
+    linkLabel: '카카오 고객센터 신청서 작성',
   },
   {
     id: 'naver',
@@ -159,8 +159,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://help.naver.com',
-    linkLabel: '네이버 고객센터 바로가기',
+    link: 'https://help.naver.com/alias/manage/manage4.naver',
+    linkLabel: '네이버 계정 관리 바로가기',
   },
   {
     id: 'instagram',
@@ -183,8 +183,8 @@ export const SERVICES = [
       { text: '사망진단서', required: true },
       { text: '가족관계 증명 서류', required: true },
     ],
-    link: 'https://www.instagram.com/accounts/contact_us/',
-    linkLabel: '인스타그램 고객센터 바로가기',
+    link: 'https://help.instagram.com/contact/1474899482730688',
+    linkLabel: '인스타그램 사망 계정 삭제 신청',
   },
   {
     id: 'facebook',
@@ -207,8 +207,8 @@ export const SERVICES = [
       { text: '사망진단서', required: true },
       { text: '가족관계 증명 서류', required: true },
     ],
-    link: 'https://www.facebook.com/help/1506822589577997',
-    linkLabel: '페이스북 추모 계정 신청',
+    link: 'https://www.facebook.com/help/contact/228813257197480',
+    linkLabel: '페이스북 사망 계정 삭제 신청',
   },
   {
     id: 'google',
@@ -234,7 +234,7 @@ export const SERVICES = [
       { text: '신청인 신분증', required: true },
     ],
     link: 'https://support.google.com/accounts/troubleshooter/6357590',
-    linkLabel: '구글 고객센터 바로가기',
+    linkLabel: '구글 사망 계정 처리 신청',
   },
   {
     id: 'apple',
@@ -257,8 +257,8 @@ export const SERVICES = [
       { text: '사망진단서 (공증 필요)', required: true },
       { text: '법원 명령서 (데이터 요청 시)', required: false },
     ],
-    link: 'https://support.apple.com',
-    linkLabel: '애플 고객센터 바로가기',
+    link: 'https://privacy.apple.com/',
+    linkLabel: 'Apple 개인정보 포털 (Digital Legacy)',
   },
   {
     id: 'band',
@@ -280,8 +280,8 @@ export const SERVICES = [
       { text: '사망진단서', required: true },
       { text: '가족관계증명서', required: true },
     ],
-    link: 'https://help.band.us',
-    linkLabel: '밴드 고객센터 바로가기',
+    link: 'https://help.band.us/hc/ko/requests/new',
+    linkLabel: '밴드 고객센터 문의 바로가기',
   },
 
   // ────────────────────────────────────────────────────────────
@@ -310,8 +310,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.tworld.co.kr',
-    linkLabel: 'SKT T월드 바로가기',
+    link: 'https://www.tworld.co.kr/normal/contractChange/terminateAgreement.do',
+    linkLabel: 'T world 해지 신청 바로가기',
   },
   {
     id: 'skt',
@@ -336,8 +336,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.tworld.co.kr',
-    linkLabel: 'T월드 바로가기',
+    link: 'https://www.tworld.co.kr/normal/contractChange/terminateAgreement.do',
+    linkLabel: 'T world 해지 신청 바로가기',
   },
   {
     id: 'kt',
@@ -362,8 +362,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.kt.com',
-    linkLabel: 'KT 바로가기',
+    link: 'https://product.kt.com/wDic/productDetailView.do?TE_KIND=WD&TE_ID=1000006',
+    linkLabel: 'KT 해지 접수 바로가기',
   },
   {
     id: 'lgu',
@@ -388,8 +388,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '신청인 신분증', required: true },
     ],
-    link: 'https://www.lguplus.com',
-    linkLabel: 'LG U+ 바로가기',
+    link: 'https://www.lguplus.com/mypage/contract/cancel',
+    linkLabel: 'LG U+ 해지 신청 바로가기',
   },
 
   // ────────────────────────────────────────────────────────────
@@ -420,8 +420,8 @@ export const SERVICES = [
       { text: '상속인 전원 인감증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.kbstar.com',
-    linkLabel: 'KB국민은행 바로가기',
+    link: 'https://www.fss.or.kr/fss/main/contents.do?menuNo=200046',
+    linkLabel: '금감원 상속인 금융거래 통합조회',
   },
   {
     id: 'shinhan',
@@ -446,8 +446,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.shinhan.com',
-    linkLabel: '신한은행 바로가기',
+    link: 'https://www.fss.or.kr/fss/main/contents.do?menuNo=200046',
+    linkLabel: '금감원 상속인 금융거래 통합조회',
   },
   {
     id: 'woori',
@@ -472,8 +472,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.wooribank.com',
-    linkLabel: '우리은행 바로가기',
+    link: 'https://www.fss.or.kr/fss/main/contents.do?menuNo=200046',
+    linkLabel: '금감원 상속인 금융거래 통합조회',
   },
   {
     id: 'hana',
@@ -498,8 +498,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.hanabank.com',
-    linkLabel: '하나은행 바로가기',
+    link: 'https://www.fss.or.kr/fss/main/contents.do?menuNo=200046',
+    linkLabel: '금감원 상속인 금융거래 통합조회',
   },
   {
     id: 'nh',
@@ -524,8 +524,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://banking.nonghyup.com',
-    linkLabel: 'NH농협은행 바로가기',
+    link: 'https://www.fss.or.kr/fss/main/contents.do?menuNo=200046',
+    linkLabel: '금감원 상속인 금융거래 통합조회',
   },
   {
     id: 'kakaobank',
@@ -549,8 +549,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.kakaobank.com',
-    linkLabel: '카카오뱅크 바로가기',
+    link: 'https://www.kakaobank.com/faq',
+    linkLabel: '카카오뱅크 고객센터 바로가기',
   },
   {
     id: 'tossbank',
@@ -574,8 +574,8 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '상속인 신분증', required: true },
     ],
-    link: 'https://www.tossbank.com',
-    linkLabel: '토스뱅크 바로가기',
+    link: 'https://www.tossbank.com/service-center',
+    linkLabel: '토스뱅크 고객센터 바로가기',
   },
 
   // ────────────────────────────────────────────────────────────
@@ -601,8 +601,8 @@ export const SERVICES = [
     documents: [
       { text: '사망진단서 (일부 서비스)', required: false },
     ],
-    link: 'https://help.netflix.com',
-    linkLabel: '넷플릭스 고객센터',
+    link: 'https://help.netflix.com/ko/node/407',
+    linkLabel: '넷플릭스 계정 해지 도움말',
   },
   {
     id: 'coupang',
@@ -625,8 +625,8 @@ export const SERVICES = [
       { text: '사망진단서', required: true },
       { text: '가족관계증명서', required: true },
     ],
-    link: 'https://cs.coupang.com',
-    linkLabel: '쿠팡 고객센터 바로가기',
+    link: 'https://www.coupang.com/np/mypage/rocketwow',
+    linkLabel: '로켓와우 해지 바로가기',
   },
   {
     id: 'melon',
@@ -648,8 +648,8 @@ export const SERVICES = [
     documents: [
       { text: '사망진단서 (일부 서비스)', required: false },
     ],
-    link: 'https://www.melon.com',
-    linkLabel: '멜론 바로가기',
+    link: 'https://www.melon.com/myMusic/subscribe.htm',
+    linkLabel: '멜론 구독 관리 바로가기',
   },
   {
     id: 'naver-plus',
@@ -669,8 +669,8 @@ export const SERVICES = [
     documents: [
       { text: '사망진단서', required: false },
     ],
-    link: 'https://help.naver.com',
-    linkLabel: '네이버 고객센터 바로가기',
+    link: 'https://new.smartstore.naver.com/main/naverplus',
+    linkLabel: '네이버 플러스 멤버십 관리',
   },
 
   // ────────────────────────────────────────────────────────────
@@ -696,7 +696,7 @@ export const SERVICES = [
     documents: [
       { text: '사망진단서 (요청 시)', required: false },
     ],
-    link: 'https://help.baemin.com',
+    link: 'https://cs.baemin.com/hc/ko',
     linkLabel: '배민 고객센터 바로가기',
   },
   {
@@ -716,7 +716,7 @@ export const SERVICES = [
       { emoji: '🗑️', title: '계정 삭제', desc: '고객센터를 통해 계정을 삭제합니다.' },
     ],
     documents: [{ text: '사망진단서 (요청 시)', required: false }],
-    link: 'https://cs.yogiyo.co.kr',
+    link: 'https://help.yogiyo.co.kr/hc/ko',
     linkLabel: '요기요 고객센터 바로가기',
   },
   {
@@ -740,7 +740,7 @@ export const SERVICES = [
       { text: '사망진단서', required: false },
       { text: '가족관계증명서', required: false },
     ],
-    link: 'https://help.gmarket.co.kr',
+    link: 'https://help.gmarket.co.kr/hc/ko',
     linkLabel: 'G마켓 고객센터 바로가기',
   },
   {
@@ -764,8 +764,8 @@ export const SERVICES = [
       { text: '사망진단서', required: false },
       { text: '가족관계증명서', required: false },
     ],
-    link: 'https://cs.11st.co.kr',
-    linkLabel: '11번가 고객센터 바로가기',
+    link: 'https://m.11st.co.kr/mw/mypage/memberWithdrawal.tmall',
+    linkLabel: '11번가 회원 탈퇴 바로가기',
   },
   {
     id: 'daangn',
@@ -785,7 +785,7 @@ export const SERVICES = [
     ],
     documents: [{ text: '사망진단서 (요청 시)', required: false }],
     link: 'https://www.daangn.com',
-    linkLabel: '당근마켓 바로가기',
+    linkLabel: '당근마켓 앱 → 설정 → 계정 삭제',
   },
   {
     id: 'socar',
@@ -805,8 +805,8 @@ export const SERVICES = [
       { emoji: '💰', title: '크레딧 환불', desc: '잔여 크레딧이 있는 경우 환불을 요청합니다.' },
     ],
     documents: [{ text: '사망진단서', required: false }],
-    link: 'https://help.socar.kr',
-    linkLabel: '쏘카 고객센터 바로가기',
+    link: 'https://help.socar.kr/hc/ko/requests/new',
+    linkLabel: '쏘카 고객센터 문의 바로가기',
   },
   {
     id: 'gym',
@@ -829,7 +829,7 @@ export const SERVICES = [
       { text: '가족관계증명서', required: true },
       { text: '이용 계약서 또는 결제 내역', required: false },
     ],
-    link: 'https://www.ccredit.go.kr',
+    link: 'https://www.ccredit.go.kr/ccredit/main.do',
     linkLabel: '소비자분쟁조정위원회 바로가기',
   },
 
@@ -859,8 +859,8 @@ export const SERVICES = [
       { text: '수익자 신분증', required: true },
       { text: '수익자 통장 사본', required: true },
     ],
-    link: 'https://www.samsunglife.com',
-    linkLabel: '삼성생명 바로가기',
+    link: 'https://www.samsunglife.com/individual/insure/claim/index.html',
+    linkLabel: '삼성생명 보험금 청구 바로가기',
   },
   {
     id: 'hanwha-life',
@@ -885,8 +885,8 @@ export const SERVICES = [
       { text: '수익자 신분증', required: true },
       { text: '수익자 통장 사본', required: true },
     ],
-    link: 'https://www.hanwhalife.com',
-    linkLabel: '한화생명 바로가기',
+    link: 'https://www.hanwhalife.com/online/claim/claimMain.do',
+    linkLabel: '한화생명 보험금 청구 바로가기',
   },
   {
     id: 'kyobo',
@@ -911,7 +911,7 @@ export const SERVICES = [
       { text: '수익자 신분증', required: true },
       { text: '수익자 통장 사본', required: true },
     ],
-    link: 'https://www.kyobo.co.kr',
-    linkLabel: '교보생명 바로가기',
+    link: 'https://www.kyobo.co.kr/dgt/web/ins/claim/death',
+    linkLabel: '교보생명 사망보험금 청구',
   },
 ]
