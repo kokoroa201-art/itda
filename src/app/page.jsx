@@ -20,11 +20,10 @@ const TRUST = [
 ]
 
 const NAV_LINKS = [
-  { label: '서비스 소개',   href: '/services' },
-  { label: '절차 가이드',   href: '/checklist' },
-  { label: '카테고리',      href: '/services' },
-  { label: '자주 묻는 질문', href: '#faq' },
-  { label: '고객센터',      href: '#' },
+  { label: '서비스 소개',    href: '/about' },
+  { label: '절차 가이드',    href: '/guide' },
+  { label: '카테고리',       href: '/services' },
+  { label: '자주 묻는 질문', href: '/faq' },
 ]
 
 function HubDiagram() {
