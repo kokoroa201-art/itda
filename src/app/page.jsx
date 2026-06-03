@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import ApplyModal from '../components/ApplyModal'
-import { CATEGORIES } from '../data/services'
+import { CATEGORIES, SERVICES } from '../data/services'
 
 const NAV_LINKS = [
   { label: '무료 절차 안내', href: '/services' },
@@ -126,19 +126,39 @@ export default function HomePage() {
               <strong className="text-[#1A2035] font-semibold">단계별로 쉽게 안내</strong>해드립니다.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-12">
-              <a href="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-white rounded-full gradient-btn shadow-lg hover:opacity-95 hover:-translate-y-0.5 transition-all"
-                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                무료로 절차 확인하기 →
+            {/* 두 개 메인 액션 카드 */}
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              <a href="/checklist"
+                className="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border-2 border-transparent
+                  hover:border-[#3B6D4A]/40 hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-sm text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  style={{ backgroundColor: '#E6F7F2' }}>
+                  ✅
+                </div>
+                <div>
+                  <p className="font-bold text-[#1A2035] text-sm" style={{ letterSpacing: '-0.02em' }}>정리하기</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{SERVICES.length}개 서비스 체크리스트</p>
+                </div>
               </a>
-              <button onClick={() => openApply('premium')}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
-                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                전문가 도움 받기
-              </button>
+              <a href="/services"
+                className="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border-2 border-transparent
+                  hover:border-[#0057B8]/40 hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-sm text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  style={{ backgroundColor: '#EBF3FF' }}>
+                  📋
+                </div>
+                <div>
+                  <p className="font-bold text-[#1A2035] text-sm" style={{ letterSpacing: '-0.02em' }}>해지 안내</p>
+                  <p className="text-xs text-gray-400 mt-0.5">서비스별 해지 방법</p>
+                </div>
+              </a>
             </div>
+
+            {/* 전문가 도움 버튼 */}
+            <button onClick={() => openApply('premium')}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-gray-500 rounded-full bg-white border border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all text-sm mb-10">
+              전문가 도움 받기 →
+            </button>
 
             {/* 카테고리 바로가기 */}
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
