@@ -27,9 +27,9 @@ export default async function ServiceDetailPage({ params }) {
   return (
     <div className="min-h-screen pb-28" style={{ backgroundColor: '#F8F7F4' }}>
 
-      {/* 스티키 상단 바 */}
-      <div className="sticky top-0 z-20 bg-white border-b border-gray-100">
-        <div className="max-w-2xl mx-auto px-4 py-3.5 flex items-center gap-2">
+      {/* 서브 상단 바 (Navbar 아래) */}
+      <div className="sticky top-20 z-20 bg-white border-b border-gray-100">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2">
           <Link href="/services"
             className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
             ← {category?.label || '목록'}

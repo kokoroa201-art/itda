@@ -64,14 +64,8 @@ export default function ChecklistPage() {
     <div className="min-h-screen pb-40" style={{ backgroundColor: '#F8F7F4' }}>
 
       {/* 상단 바 */}
-      <div className="sticky top-0 z-20 bg-white border-b border-gray-100">
+      <div className="sticky top-20 z-20 bg-white border-b border-gray-100">
         <div className="max-w-2xl mx-auto px-4 pt-4 pb-0">
-          <div className="flex items-center gap-2 mb-3">
-            <a href="/" className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">
-              ← 홈
-            </a>
-          </div>
-
           <h1 className="text-xl font-black text-[#1A2035] mb-0.5" style={{ letterSpacing: '-0.035em' }}>
             정리 대상 서비스 선택
           </h1>

@@ -36,14 +36,8 @@ export default function ServicesPage() {
     <div className="min-h-screen" style={{ backgroundColor: '#F8F7F4' }}>
 
       {/* 상단 헤더 */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
+      <div className="bg-white border-b border-gray-100 sticky top-20 z-10">
         <div className="max-w-2xl mx-auto px-4 pt-5 pb-0">
-          <div className="flex items-center gap-2 mb-4">
-            <a href="/" className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">
-              ← 홈
-            </a>
-          </div>
-
           <h1 className="text-xl font-black text-[#1A2035] mb-0.5" style={{ letterSpacing: '-0.035em' }}>
             해지 안내
           </h1>

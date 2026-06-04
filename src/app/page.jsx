@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import ApplyModal from '../components/ApplyModal'
 
+// NAV_LINKS는 Navbar 컴포넌트로 이동됨
+
 const CATEGORIES = [
   { icon: '🏦', nodeL1: '금융',    nodeL2: '계좌',        title: '금융·계좌',        desc: '계좌 정리, 연금, 보험',     cat: 'financial' },
   { icon: '📱', nodeL1: '통신',    nodeL2: '요금',        title: '통신·요금',        desc: '이동통신, 인터넷, 요금제',  cat: 'telecom' },
@@ -17,13 +19,6 @@ const TRUST = [
   { emoji: '⏱️', title: '시간 절약',           desc: '여러 사이트 한 번에' },
   { emoji: '📄', title: '쉬운 절차 안내',       desc: '단계별로 쉽게 안내' },
   { emoji: '🔒', title: '개인정보 보호',        desc: '안심하고 이용할 수 있는 보안' },
-]
-
-const NAV_LINKS = [
-  { label: '서비스 소개',    href: '/about' },
-  { label: '절차 가이드',    href: '/guide' },
-  { label: '카테고리',       href: '/services' },
-  { label: '자주 묻는 질문', href: '/faq' },
 ]
 
 function HubDiagram() {
@@ -132,7 +127,6 @@ function HubDiagram() {
 }
 
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const [applyOpen, setApplyOpen] = useState(false)
   const [applyType, setApplyType] = useState('free')
 
@@ -140,72 +134,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
-
-      {/* ═══ NAVBAR ═══ */}
-      <nav className="fixed inset-x-0 top-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
-            <div className="flex-shrink-0">
-              <img
-                src="/img/itda_logo_White_main.png"
-                alt="잇다"
-                className="h-20 w-auto object-contain"
-                style={{ mixBlendMode: 'multiply' }}
-                onError={e => {
-                  e.currentTarget.src = '/img/itda_logo_gradation.png'
-                  e.currentTarget.style.mixBlendMode = 'normal'
-                  e.currentTarget.onerror = null
-                }}
-              />
-            </div>
-
-            <div className="hidden md:flex items-center gap-7">
-              {NAV_LINKS.map(link => (
-                <a key={link.label} href={link.href}
-                  className="text-sm font-medium text-gray-500 hover:text-[#0057B8] transition-colors"
-                  style={{ letterSpacing: '-0.01em' }}>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="hidden md:flex items-center gap-3">
-              <a href="/checklist" className="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">
-                정리 체크리스트
-              </a>
-              <a href="/services"
-                className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-btn shadow-md hover:opacity-90 transition-opacity"
-                style={{ letterSpacing: '-0.01em' }}>
-                무료로 절차 찾기
-              </a>
-            </div>
-
-            <button onClick={() => setMenuOpen(v => !v)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-50"
-              aria-label="메뉴">
-              <span className="text-xl leading-none">{menuOpen ? '✕' : '☰'}</span>
-            </button>
-          </div>
-        </div>
-
-        {menuOpen && (
-          <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-1">
-            {NAV_LINKS.map(link => (
-              <a key={link.label} href={link.href}
-                className="block py-2.5 text-sm font-medium text-gray-700 border-b border-gray-50 last:border-0">
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-3 flex flex-col gap-2">
-              <a href="/checklist" className="text-center text-sm text-gray-500 py-2">정리 체크리스트</a>
-              <a href="/services"
-                className="w-full py-3 text-sm font-bold text-white rounded-full gradient-btn text-center block">
-                무료로 절차 찾기
-              </a>
-            </div>
-          </div>
-        )}
-      </nav>
 
       {/* ═══ HERO ═══ */}
       <section
