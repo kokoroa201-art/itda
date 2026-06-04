@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 
 const SERVICE_OPTIONS = [
-  { value: 'free', label: '무료 절차 안내 신청' },
-  { value: 'financial', label: '금융·계좌 정리' },
-  { value: 'telecom', label: '통신·요금 해지' },
-  { value: 'government', label: '정부24·행정 처리' },
-  { value: 'sns', label: 'SNS·디지털 계정 정리' },
-  { value: 'subscription', label: '구독 서비스 확인' },
-  { value: 'inheritance', label: '상속 준비 서류' },
-  { value: 'premium', label: '전문가 도움 요청 (종합)' },
+  { value: 'doc',         label: '서류 작성 도움' },
+  { value: 'lawyer',      label: '법무사 연결 (상속·등기)' },
+  { value: 'tax',         label: '세무사 연결 (상속세·신고)' },
+  { value: 'consult',     label: '전문 상담 (절차 전반)' },
+  { value: 'financial',   label: '금융·계좌 정리 대행' },
+  { value: 'telecom',     label: '통신·구독 해지 대행' },
+  { value: 'inheritance', label: '상속 준비 종합 지원' },
+  { value: 'other',       label: '기타 (직접 입력)' },
 ]
 
 export default function ApplyModal({ open, onClose, defaultType = 'free' }) {
@@ -106,8 +106,8 @@ export default function ApplyModal({ open, onClose, defaultType = 'free' }) {
             <>
               <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">서비스 신청</h2>
-                  <p className="text-sm text-gray-500 mt-0.5">담당자가 확인 후 빠르게 연락드립니다.</p>
+                  <h2 className="text-xl font-bold text-gray-900">전문가 도움 요청</h2>
+                  <p className="text-sm text-gray-500 mt-0.5">접수 후 담당자가 1영업일 내 연락드립니다.</p>
                 </div>
                 <button
                   onClick={onClose}

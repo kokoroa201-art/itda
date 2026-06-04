@@ -300,49 +300,77 @@ export default function HomePage() {
       </section>
 
       {/* ═══ PAID BANNER ═══ */}
-      <section className="py-14" style={{ background: 'linear-gradient(135deg, #00C8A5 0%, #0057B8 100%)' }}>
+      <section className="py-16" style={{ background: 'linear-gradient(135deg, #0A1628 0%, #1A3A5C 100%)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="text-center sm:text-left">
-              <p className="text-white/80 text-base font-medium mb-2" style={{ letterSpacing: '-0.01em' }}>
-                혼자 진행하기 어렵다면
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="text-center lg:text-left max-w-lg">
+              <p className="text-sm font-semibold mb-3" style={{ color: '#00C8A5', letterSpacing: '0.05em' }}>
+                혼자 처리하기 어려울 때
               </p>
-              <h3 className="text-2xl font-black text-white" style={{ letterSpacing: '-0.03em' }}>
-                전문가가 직접 도와드립니다
+              <h3 className="text-2xl font-black text-white mb-3" style={{ letterSpacing: '-0.03em' }}>
+                아무도 이 길을<br />혼자 걸어서는 안 됩니다.
               </h3>
-              <p className="text-white/70 text-base mt-2" style={{ letterSpacing: '-0.01em' }}>
-                필요한 절차를 처음부터 끝까지 함께 진행합니다
+              <p className="text-white/60 text-sm leading-relaxed">
+                직접 처리하기 복잡한 절차는 전문가가 함께합니다.<br />
+                서류 작성부터 법무사·세무사 연결까지.
               </p>
             </div>
-            <div className="flex flex-col items-center sm:items-end gap-3 flex-shrink-0">
-              <div className="flex gap-2 text-sm text-white/70 flex-wrap justify-center sm:justify-end">
-                <span className="px-3 py-1 rounded-full bg-white/15">📄 서류 작성 도움</span>
-                <span className="px-3 py-1 rounded-full bg-white/15">⚖️ 법무사·세무사 연결</span>
-                <span className="px-3 py-1 rounded-full bg-white/15">💬 전문 상담 지원</span>
+            <div className="flex flex-col items-center gap-4 flex-shrink-0">
+              <div className="grid grid-cols-3 gap-2 text-center">
+                {[
+                  { emoji: '📄', label: '서류 작성' },
+                  { emoji: '⚖️', label: '법무사 연결' },
+                  { emoji: '🧾', label: '세무사 연결' },
+                ].map((s, i) => (
+                  <div key={i} className="px-3 py-3 rounded-xl flex flex-col items-center gap-1"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <span className="text-xl">{s.emoji}</span>
+                    <span className="text-white/60 text-xs font-medium">{s.label}</span>
+                  </div>
+                ))}
               </div>
-              <button onClick={() => openApply('premium')}
-                className="px-7 py-4 bg-white text-[#0057B8] text-base font-bold rounded-full shadow-xl hover:bg-blue-50 hover:-translate-y-0.5 transition-all whitespace-nowrap"
-                style={{ letterSpacing: '-0.01em' }}>
-                문의하기 →
+              <button onClick={() => openApply('consult')}
+                className="w-full px-8 py-4 bg-white font-bold rounded-full shadow-xl hover:-translate-y-0.5 transition-all text-sm whitespace-nowrap"
+                style={{ color: '#0A1628', letterSpacing: '-0.01em' }}>
+                전문가 도움 요청하기 →
               </button>
+              <p className="text-white/40 text-xs">접수 후 1영업일 내 연락드립니다</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="bg-[#010C26] py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <img src="/img/itda_logo_black.png" alt="잇다"
-              className="h-7 w-auto object-contain mb-2"
-              onError={e => { e.currentTarget.style.display = 'none' }} />
-            <p className="text-sm text-gray-500">흩어진 절차를, 한 곳으로 · © 2026 잇다</p>
+      <footer className="bg-[#010C26] py-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between gap-8 mb-8">
+            <div>
+              <img src="/img/itda_logo_black.png" alt="잇다"
+                className="h-7 w-auto object-contain mb-2"
+                onError={e => { e.currentTarget.style.display = 'none' }} />
+              <p className="text-sm text-gray-500 mt-1">흩어진 절차를, 한 곳으로</p>
+              <p className="text-xs text-gray-600 mt-1">가족을 잃은 분들 곁에 있겠습니다.</p>
+            </div>
+            <div className="flex gap-12 text-sm">
+              <div className="space-y-2">
+                <p className="text-gray-400 font-semibold text-xs mb-3" style={{ letterSpacing: '0.08em' }}>서비스</p>
+                <a href="/services" className="block text-gray-500 hover:text-gray-300 transition-colors">해지 안내</a>
+                <a href="/checklist" className="block text-gray-500 hover:text-gray-300 transition-colors">체크리스트</a>
+                <a href="/guide" className="block text-gray-500 hover:text-gray-300 transition-colors">절차 가이드</a>
+              </div>
+              <div className="space-y-2">
+                <p className="text-gray-400 font-semibold text-xs mb-3" style={{ letterSpacing: '0.08em' }}>회사</p>
+                <a href="/about" className="block text-gray-500 hover:text-gray-300 transition-colors">서비스 소개</a>
+                <a href="/faq" className="block text-gray-500 hover:text-gray-300 transition-colors">자주 묻는 질문</a>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-gray-300 transition-colors">이용약관</a>
-            <a href="#" className="hover:text-gray-300 transition-colors">개인정보처리방침</a>
-            <a href="#" className="hover:text-gray-300 transition-colors">고객센터</a>
+          <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs text-gray-600">© 2026 잇다. All rights reserved.</p>
+            <div className="flex gap-5 text-xs text-gray-600">
+              <a href="#" className="hover:text-gray-400 transition-colors">이용약관</a>
+              <a href="#" className="hover:text-gray-400 transition-colors">개인정보처리방침</a>
+            </div>
           </div>
         </div>
       </footer>
