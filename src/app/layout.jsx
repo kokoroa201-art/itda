@@ -1,4 +1,5 @@
 import './globals.css'
+import Navbar from '../components/Navbar'
 
 export const metadata = {
   title: '잇다 — 흩어진 절차를, 한 곳으로',
@@ -15,7 +16,10 @@ export default function RootLayout({ children }) {
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   )
 }
