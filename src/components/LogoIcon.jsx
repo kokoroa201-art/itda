@@ -12,7 +12,7 @@ export default function LogoIcon({ service, size = 56 }) {
     ? phase === 0
       ? `https://logo.clearbit.com/${service.domain}`
       : phase === 1
-      ? `https://www.google.com/s2/favicons?domain=${service.domain}&sz=128`
+      ? `https://www.google.com/s2/favicons?domain=${service.domain}&sz=256`
       : null
     : null
 
