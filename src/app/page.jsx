@@ -70,7 +70,7 @@ const REVIEWS = [
 
 function HubDiagram() {
   const [hoveredIdx, setHoveredIdx] = useState(null)
-  const cx = 250, cy = 250, outerR = 168, innerR = 74
+  const cx = 250, cy = 250, outerR = 168, innerR = 72
 
   const nodes = CATEGORIES.map((cat, i) => {
     const angle = (i * 60 - 90) * Math.PI / 180
@@ -83,48 +83,64 @@ function HubDiagram() {
 
   return (
     <div className="relative w-full max-w-[460px] mx-auto select-none">
-      <div className="absolute inset-0 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #00C8A5 0%, #0057B8 100%)' }} />
+      {/* 배경 환경광 */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,200,165,0.18) 0%, rgba(0,87,184,0.12) 55%, transparent 100%)',
+          filter: 'blur(24px)',
+        }} />
 
-      <svg viewBox="0 0 500 500" className="relative w-full drop-shadow-sm">
+      <svg viewBox="0 0 500 500" className="relative w-full">
         <defs>
           <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#00C8A5" />
             <stop offset="100%" stopColor="#0057B8" />
           </linearGradient>
-          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00C8A5" />
-            <stop offset="100%" stopColor="#0057B8" />
-          </linearGradient>
           <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00C8A5" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#0057B8" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="#00C8A5" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#0057B8" stopOpacity="0.55" />
           </linearGradient>
+          <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#00C8A5" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#0057B8" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#0057B8" stopOpacity="0" />
+          </radialGradient>
           <filter id="nodeShadow" x="-40%" y="-40%" width="180%" height="180%">
             <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#00000015" />
           </filter>
           <filter id="nodeHoverShadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="7" stdDeviation="14" floodColor="#00C8A545" />
           </filter>
-          <filter id="centerShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="10" floodColor="#0057B830" />
+          <filter id="centerShadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="6" stdDeviation="16" floodColor="#0057B850" />
           </filter>
+          <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <clipPath id="centerClip">
+            <circle cx={cx} cy={cy} r={innerR} />
+          </clipPath>
         </defs>
 
+        {/* 궤도 링 */}
         <circle cx={cx} cy={cy} r={outerR + 18}
-          fill="none" stroke="#D8ECFF" strokeWidth="1.5" strokeDasharray="4,9" opacity="0.6" />
+          fill="none" stroke="#C8DEFF" strokeWidth="1.2" strokeDasharray="4,9" opacity="0.5" />
 
+        {/* 연결선 */}
         {nodes.map((n, i) => (
           <line key={i} x1={cx} y1={cy} x2={n.x} y2={n.y}
-            stroke="url(#lineGrad)" strokeWidth="1.5" strokeDasharray="6,5" opacity="0.6" />
+            stroke="url(#lineGrad)" strokeWidth="1.8" strokeDasharray="5,6" opacity="0.65" />
         ))}
 
+        {/* 중간 점 */}
         {nodes.map((n, i) => {
-          const mx = cx + (n.x - cx) * 0.55
-          const my = cy + (n.y - cy) * 0.55
-          return <circle key={i} cx={mx} cy={my} r={4.5} fill="url(#centerGrad)" opacity="0.7" />
+          const mx = cx + (n.x - cx) * 0.54
+          const my = cy + (n.y - cy) * 0.54
+          return <circle key={i} cx={mx} cy={my} r={4} fill="url(#centerGrad)" opacity="0.75" />
         })}
 
+        {/* 노드 */}
         {nodes.map((n, i) => {
           const isHov = hoveredIdx === i
           const col = isHov ? '#007A68' : '#1A2035'
@@ -160,13 +176,55 @@ function HubDiagram() {
           )
         })}
 
-        <circle cx={cx} cy={cy} r={innerR + 10} fill="url(#ringGrad)" filter="url(#centerShadow)" />
-        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" />
+        {/* ── 중심부 ── */}
+        {/* 펄스 링 3 (가장 바깥) */}
+        <circle cx={cx} cy={cy} r={innerR + 32} fill="none"
+          stroke="url(#centerGrad)" strokeWidth="1" opacity="0.1">
+          <animate attributeName="r"
+            values={`${innerR + 24};${innerR + 36};${innerR + 24}`}
+            dur="3.2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.1;0.02;0.1"
+            dur="3.2s" repeatCount="indefinite" />
+        </circle>
+
+        {/* 펄스 링 2 */}
+        <circle cx={cx} cy={cy} r={innerR + 18} fill="none"
+          stroke="url(#centerGrad)" strokeWidth="1.5" opacity="0.18">
+          <animate attributeName="r"
+            values={`${innerR + 12};${innerR + 22};${innerR + 12}`}
+            dur="3.2s" begin="0.6s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.18;0.05;0.18"
+            dur="3.2s" begin="0.6s" repeatCount="indefinite" />
+        </circle>
+
+        {/* 펄스 링 1 */}
+        <circle cx={cx} cy={cy} r={innerR + 8} fill="none"
+          stroke="url(#centerGrad)" strokeWidth="2" opacity="0.28">
+          <animate attributeName="r"
+            values={`${innerR + 4};${innerR + 11};${innerR + 4}`}
+            dur="3.2s" begin="1.1s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.28;0.1;0.28"
+            dur="3.2s" begin="1.1s" repeatCount="indefinite" />
+        </circle>
+
+        {/* 글로우 채움 */}
+        <circle cx={cx} cy={cy} r={innerR + 6} fill="url(#centerGlow)" />
+
+        {/* 메인 그라데이션 원 */}
+        <circle cx={cx} cy={cy} r={innerR} fill="url(#centerGrad)" filter="url(#centerShadow)" />
+
+        {/* 내부 하이라이트 (광택) */}
+        <ellipse cx={cx - 18} cy={cy - 22} rx={32} ry={22}
+          fill="white" opacity="0.12" />
+
+        {/* 흰색 로고 — 그라데이션 원 위에 자연스럽게 */}
         <image
-          href="/img/itda_logo_gradation.png"
-          x={cx - 56} y={cy - 36}
-          width="112" height="72"
+          href="/img/itda_logo_white.png"
+          x={cx - 50} y={cy - 26}
+          width="100" height="52"
           preserveAspectRatio="xMidYMid meet"
+          filter="url(#logoGlow)"
+          clipPath="url(#centerClip)"
         />
       </svg>
     </div>

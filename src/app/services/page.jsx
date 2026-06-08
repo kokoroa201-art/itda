@@ -25,6 +25,11 @@ export default function ServicesPage() {
     if (cat) setActiveCategory(cat)
   }, [])
 
+  // 카테고리 바뀌면 리스트 상단으로 스크롤
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [activeCategory])
+
   const filtered = SERVICES.filter(s => {
     const matchCat = activeCategory === 'all' || s.category === activeCategory
     const q = search.toLowerCase()
