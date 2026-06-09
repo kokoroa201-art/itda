@@ -198,16 +198,17 @@ export default function HomePage() {
               </div>
 
               <h1 className="font-black text-[#1A2035] mb-6"
-                style={{ fontSize: 'clamp(2.4rem, 5vw, 3.5rem)', lineHeight: 1.1, letterSpacing: '-0.04em' }}>
-                복잡한 절차,<br />
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.15, letterSpacing: '-0.04em' }}>
+                사망 후 해야 할<br />
+                모든 절차,<br />
                 <span className="gradient-text">한 곳에서 잇다</span>
               </h1>
 
               <p className="text-gray-500 mb-8"
                 style={{ fontSize: '1.0625rem', lineHeight: 1.85, letterSpacing: '-0.01em' }}>
-                흩어진 정보와 여러 사이트를 찾아다니지 마세요.
-                사망 이후 필요한 절차와 기관을{' '}
-                <strong className="text-[#1A2035] font-semibold">쉽고 빠르게 안내</strong>해드립니다.
+                사망신고부터 금융계좌 정리, 통신 해지, 상속 서류까지 —<br />
+                처음이라 막막한 절차들을{' '}
+                <strong className="text-[#1A2035] font-semibold">단계별로 안내</strong>해드려요.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -216,10 +217,10 @@ export default function HomePage() {
                   style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
                   무료로 절차 찾기 →
                 </a>
-                <a href="/checklist"
+                <a href="/guide"
                   className="inline-flex items-center justify-center gap-2 px-8 py-2.5 font-semibold text-[#1A2035] rounded-full bg-white border-2 border-gray-200 hover:border-[#00C8A5]/60 hover:-translate-y-0.5 transition-all"
                   style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                  서비스 둘러보기
+                  절차 가이드 보기
                 </a>
               </div>
 
@@ -231,7 +232,7 @@ export default function HomePage() {
                 </p>
                 <div className="grid grid-cols-2 gap-2 max-w-sm mx-auto lg:mx-0">
                   {[
-                    { emoji: '🚨', label: '사망신고 해야 해요',     href: '/guide' },
+                    { emoji: '🚨', label: '사망신고 해야 해요',      href: '/guide' },
                     { emoji: '🏦', label: '금융·계좌 정리해야 해요', href: '/services?cat=financial' },
                     { emoji: '📱', label: '통신 요금 끊어야 해요',   href: '/services?cat=telecom' },
                     { emoji: '📋', label: '뭐부터 할지 모르겠어요',  href: '/checklist' },
