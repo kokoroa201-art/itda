@@ -36,6 +36,7 @@ const PHASES = [
         link: '/services/gov24',
         linkLabel: '정부24 사망신고',
         tip: '1개월 내 신고 의무',
+        extra: '💡 주민센터 방문 시 상속 원스톱 서비스를 함께 신청하면 1~2주 안에 결과를 받을 수 있어요.',
       },
       {
         emoji: '🏦',
@@ -88,10 +89,10 @@ const PHASES = [
       {
         emoji: '🔗',
         title: '상속 원스톱 서비스 신청',
-        body: '정부24에서 금융·통신·연금 등 모든 상속 처리를 한 번에 신청할 수 있습니다.',
+        body: '주민센터에서 사망신고 시 함께 신청하는 것이 가장 빠릅니다. 금융·통신·연금 등 상속 처리를 한 번에 신청하면 보통 1~2주 안에 결과를 받을 수 있습니다. 정부24 온라인으로도 신청 가능합니다.',
         link: '/services/gov24',
         linkLabel: '정부24 원스톱 신청',
-        tip: '가장 효율적인 방법',
+        tip: '사망신고와 동시 신청 시 가장 빠름',
         highlight: true,
       },
       {
@@ -233,6 +234,12 @@ export default function GuidePage() {
                             )}
                           </div>
                           <p className="text-sm text-gray-500 leading-relaxed mb-2">{step.body}</p>
+                          {step.extra && (
+                            <div className="mb-2 px-3 py-2 rounded-xl text-xs leading-relaxed"
+                              style={{ background: '#F0FDF9', color: '#065F46', border: '1px solid #A7F3D0' }}>
+                              {step.extra}
+                            </div>
+                          )}
                           <div className="flex items-center gap-3 flex-wrap">
                             {step.tip && (
                               <span className="text-xs text-gray-400 flex items-center gap-1">
